@@ -1,10 +1,33 @@
-<script setup>
+<script setup lang="ts">
 const { title } = useCourse();
+const { query } = useRoute();
+const user = useSupabaseUser();
+
+const supabase = useSupabaseClient();
+
+watchEffect(async () => {
+  if (user.value) {
+    await navigateTo(query.redirectTo as string, {
+      replace: true,
+    });
+  }
+});
+
+const login = async () => {
+  const redirectTo = `${window.location.origin}${query.redirectTo}`;
+  const { error } = await supabase.auth.signInWithOAuth({
+    provider: "github",
+    options: { redirectTo },
+  });
+  if (error) {
+    console.log(error);
+  }
+};
 </script>
 <template>
   <div class="prose w-full max-x-2xl h-9">
     <h1>Log in to {{ title }}</h1>
-    <button class="bg-blue-500 font-bold py-2 px-4 rounded">
+    <button class="bg-blue-500 font-bold py-2 px-4 rounded" @click="login">
       Log in with GitHub
     </button>
   </div>

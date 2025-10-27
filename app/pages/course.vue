@@ -4,13 +4,14 @@ const { title, chapters } = useCourse();
 
 <template>
   <div>
-    <div class="prose mb-12">
+    <div class="mb-4 flex justify-between items-center w-full">
       <h1>
         <span class="font-medium"
           >Course:
           <span class="font-bold">{{ title }}</span>
         </span>
       </h1>
+      <UserCard />
     </div>
     <div class="flex flex-row justify-content flex-grow">
       <div
