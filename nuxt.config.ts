@@ -9,5 +9,7 @@ export default defineNuxtConfig({
     redirectOptions: {
       login: '/login',
       callback: '/',
-    }}
+      exclude: ['/', '/course/chapter/1-chapter-1/'],
+    }
+  }
 })
