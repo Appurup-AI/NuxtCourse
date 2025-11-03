@@ -1,4 +1,4 @@
-import type { Chapter, Course } from "~~/types/course";
+import type { Chapter } from "~~/types/course";
 import course from "~~/server/courseData";
 
 type OutlineBase = {
@@ -20,7 +20,7 @@ type CourseMeta = {
   chapters: OutlineChapter[];
 };
 
-export default defineEventHandler((event): CourseMeta => {
+export default defineEventHandler((): CourseMeta => {
   console.log(course.chapters);
   const outline: OutlineChapter[] = course.chapters.reduce(
     (prev: OutlineChapter[], next: Chapter) => {
